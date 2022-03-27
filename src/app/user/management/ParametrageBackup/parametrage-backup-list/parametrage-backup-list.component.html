@@ -1,0 +1,32 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      
+
+      <h2>Admin List</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let admin of admins | async">
+            <td>{{admin.prenom}}</td>
+            <td>{{admin.nom}}</td>
+            <td>{{admin.email}}</td>
+            <td>
+              <button routerLink="updateAdmin/{{admin.id}}"  class="btn btn-info" style="margin-left: 10px">update</button>
+              <button (click)="deleteAdmin(admin.id)" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  

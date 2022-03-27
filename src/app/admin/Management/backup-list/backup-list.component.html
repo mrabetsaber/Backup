@@ -1,0 +1,54 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+
+        
+      
+
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    
+   
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name  <mat-spinner *ngIf="progressFolder"></mat-spinner></th>
+      
+      <td  *matCellDef="let element" (click)="open?'':getFiles(element.id)">
+        <mat-expansion-panel class="folder" >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              
+                <fa-icon [icon]="faFolder" class="icon" ></fa-icon>
+                {{element.name}}
+              
+            </mat-panel-title>
+            
+          </mat-expansion-panel-header>
+          <mat-spinner *ngIf="progressFile"></mat-spinner>
+          <div *ngFor="let item of file">
+            <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+              <fa-icon [icon]="faFile" class="icon" ></fa-icon>
+              {{item.name}}
+              <mat-icon>download</mat-icon>
+            </button>
+          </div>
+          
+          </mat-expansion-panel>
+  
+      </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+   
+  
+    <!-- Symbol Column -->
+   
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  
+  

@@ -1,0 +1,70 @@
+<div class="container vh-100">
+    <div class="row justify-content-center h-100">
+        <div class="card my-auto shadow">
+            <div class="card-body px-5">
+                <div class="text-center">
+                    <fa-icon [icon]="faUserPlus" class="fa-3x"></fa-icon>
+                </div>
+                <div class="text-center">
+                    <h2>Welcome</h2>
+                </div>
+                <p style="color: lightslategray; text-align: center;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your 
+                    details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <input type="text" id="firstName" placeholder="first name (min 3 character)" class="form-control" formControlName="firstName"
+                            name="firstName" minlength="3"/>
+                            <small *ngIf="firstName.invalid && firstName.touched" class="text-danger">First Name is Required</small> 
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input minlength="3" type="text" id="lastName" placeholder="last name (min 3 character)" class="form-control" formControlName="lastName"
+                            name="lastName" />
+                            <small *ngIf="lastName.invalid && lastName.touched" class="text-danger">valid last Name is required</small> 
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input minlength="3" type="email" (change)="emailCheck()" id="email" placeholder="Email" class="form-control" formControlName="email"
+                            name="email" />
+                            <small *ngIf="email.invalid && email.touched" class="text-danger">Valid Email is Required</small> 
+                            <small *ngIf="emailExist" class="text-danger">Email already exist</small> 
+                            
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <select class="form-control" formControlName="role">
+                            
+                            <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+
+                          </select>
+                           
+
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input minlength="6" type="password" id="password" placeholder="Password(min 6 character)" class="form-control"
+                            formControlName="password" name="password" />
+                            <small *ngIf="password.invalid && password.touched" class="text-danger"> valid password is Required</small> 
+                    
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input  type="password" id="Rpassword" placeholder="confirm  Password" class="form-control"
+                            formControlName="Rpassword" name="Rpassword" />
+                            <small *ngIf="Rpassword.invalid && Rpassword.touched" class="text-danger">confirm Password is Required</small> 
+                            <small *ngIf="Rpassword.value!=password.value&& Rpassword.touched" class="text-danger">the password should be the same </small> 
+
+                            
+                    
+                    </div>
+                    <br>
+                    <input [disabled]="!registerForm.valid||Rpassword.value!=password.value||emailExist" type="submit" class="btn btn-primary w-100" value="Register" name="">
+                </form>
+            </div>
+           <div div class="card-footer text-right">
+            <small><a  href="" routerLink="/login">Login</a></small>
+        </div>
+        </div>
+    </div>
+</div>

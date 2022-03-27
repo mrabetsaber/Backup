@@ -1,0 +1,80 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" opened mode="side">
+      <div class="wrapper">
+        <nav id="sidebar" class="sidebar js-sidebar">
+            <div class="sidebar-content js-simplebar">
+                <a [routerLink]="[ '/admin']" class="sidebar-brand">
+          <span class="align-middle">GPRO</span>
+                </a>
+    
+                <ul class="sidebar-nav">
+                    <li class="sidebar-header">
+                        Pages
+                    </li>
+    
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" [routerLink]="[ '/admin']">
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+            </a>
+                    </li>
+    
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" [routerLink]="[ 'adminList']">
+              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Admin List</span>
+            </a>
+                    </li>
+    
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" [routerLink]="[ 'user']">
+              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">User List</span>
+            </a>
+                    </li>
+    
+                    <li class="sidebar-item">
+                      <a class="sidebar-link" [routerLink]="[ 'backups']">
+              <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">backup list</span>
+            </a>
+                    </li>
+    
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="pages-blank.html">
+              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
+            </a>
+                    </li>
+    
+                    
+    
+                </ul>
+    
+               
+            </div>
+        </nav>
+    
+        
+    </div>
+    
+    </mat-drawer>
+  
+    <div class="example-sidenav-content">
+        <mat-toolbar>
+            <button mat-icon-button class="example-icon"  (click)="drawer.toggle()" aria-label="Example icon-button with menu icon">
+              <mat-icon>menu</mat-icon>
+            </button>
+            <span>My App</span>
+            <span class="example-spacer"></span>
+            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+              <mat-icon>favorite</mat-icon>
+            </button>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+              <mat-icon>share</mat-icon>
+            </button>
+          </mat-toolbar>
+     
+      <app-navbar></app-navbar>
+      <router-outlet></router-outlet>
+      
+    </div>
+  
+  </mat-drawer-container>
+
+ 

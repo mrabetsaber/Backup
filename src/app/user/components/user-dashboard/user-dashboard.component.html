@@ -1,0 +1,65 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" opened mode="side">
+      <div class="wrapper">
+        <nav id="sidebar" class="sidebar js-sidebar">
+            <div class="sidebar-content js-simplebar">
+                <a [routerLink]="[ '/user']" class="sidebar-brand">
+          <span class="align-middle">User</span>
+                </a>
+    
+                <ul class="sidebar-nav">
+                    <li class="sidebar-header">
+                        Pages
+                    </li>
+    
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" [routerLink]="[ '/user']">
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+            </a>
+                    </li>
+    
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" [routerLink]="[ 'addServer']">
+              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Add server </span>
+            </a>
+                    </li>
+    
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" [routerLink]="[ 'addParametrageBackup']">
+              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Add schedule</span>
+            </a>
+                    </li>
+    
+                   
+
+                </ul>
+    
+               
+            </div>
+        </nav>
+    
+        
+    </div>
+    
+    </mat-drawer>
+  
+    <div class="example-sidenav-content">
+        <mat-toolbar>
+            <button mat-icon-button class="example-icon"  (click)="drawer.toggle()" aria-label="Example icon-button with menu icon">
+              <mat-icon>menu</mat-icon>
+            </button>
+            <span>My App</span>
+            <span class="example-spacer"></span>
+            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+              <mat-icon>favorite</mat-icon>
+            </button>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+              <mat-icon>share</mat-icon>
+            </button>
+          </mat-toolbar>
+     
+      <router-outlet></router-outlet>
+      
+    </div>
+  
+  </mat-drawer-container>

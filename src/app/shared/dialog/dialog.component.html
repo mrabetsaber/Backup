@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Hi {{data.dataBaseName}}</h1>
+<h1 mat-dialog-title>time: {{data.schedule}}</h1>
+<h1 mat-dialog-title>server {{data.server}}</h1>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No </button>
+  <button mat-button [mat-dialog-close]="result" cdkFocusInitial>Ok</button>
+</div>

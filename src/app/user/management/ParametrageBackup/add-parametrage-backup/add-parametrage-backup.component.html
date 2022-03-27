@@ -1,0 +1,482 @@
+<!-- TODO: add this propretie to next Line "linear" -->
+<mat-stepper #stepper>
+
+
+  <mat-step [stepControl]="firstFormGroup" [editable]="false">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Details</ng-template>
+        <h5>Select the dataBase Server to backup</h5>
+        <mat-form-field appearance="outline">
+          <mat-label>Backup Server</mat-label>
+          <mat-select formControlName="type" >
+            <mat-option *ngFor="let db of dbs" [value]="db.value">
+              {{db.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+       
+        <div class="example-div">
+           <h5>Select the Database Name</h5>
+           <p>Database Name</p>
+           <mat-form-field class="example-full-width" appearance="outline" >
+               <input matInput formControlName="dataBaseName" >
+           </mat-form-field>
+         </div>
+        <div>
+          <button mat-button matStepperNext >Next</button>
+        </div>
+      </form>
+  </mat-step>
+
+
+
+
+
+  
+
+
+
+
+  <mat-step  [stepControl]="thirdFormGroup" label="schedule" [editable]="true" >
+      <mat-button-toggle-group name="favoriteColor"class="example-spacer" aria-label="Favorite Color">
+        <mat-button-toggle (click)="showSeconds()" >Seconds</mat-button-toggle>
+        <mat-button-toggle (click)="showMinutes()">Minutes</mat-button-toggle>
+        <mat-button-toggle (click)="showHours()">Hour</mat-button-toggle>
+        <mat-button-toggle (click)="showDays()">Day</mat-button-toggle>
+        <mat-button-toggle (click)="showMonths()">Month</mat-button-toggle>
+      </mat-button-toggle-group>
+      <form  [formGroup]="thirdFormGroup">
+        <div *ngIf="showSecond" >
+          <div class="example-div" [formGroup]="SecondRadioForm">
+            <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="SecondRadioControl" class="example-radio-group" >
+
+              <mat-radio-button  value="1"  class="example-radio-button" >
+                every second
+              </mat-radio-button>
+
+              <mat-radio-button value="2" class="example-radio-button" [formGroup]="EverySecondStartingForm" >
+                every 
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="every" >
+                    <mat-option *ngFor="let tim of time" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                second(s) starting at second
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="starting" >
+                    <mat-option *ngFor="let tim of time" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-radio-button>
+
+              <mat-radio-button value="3" class="example-radio-button"  [formGroup]="SpecificSecondForm" >
+                Specific second (choose one or many)
+                <mat-form-field appearance="outline" required >
+                  <mat-select multiple  formControlName="specificSecond"   >
+                    <!-- <mat-select-trigger>
+                      {{second.value ? second.value[0] : ''}}
+                      <span *ngIf="second.value?.length > 1" class="example-additional-selection">
+                        (+{{second.value.length - 1}} {{second.value?.length === 2 ? 'other' : 'others'}})
+                      </span>
+                    </mat-select-trigger> -->
+                    <mat-option  *ngFor="let tim of time" [value]="tim">{{tim}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-radio-button>
+
+              <mat-radio-button value="4" class="example-radio-button" [formGroup]="EverySecondBetweenForm"  >
+                Every second between second
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="everySecond"  >
+                    <mat-option *ngFor="let tim of time" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                and second
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="between"  >
+                    <mat-option *ngFor="let tim of time" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-radio-button>
+
+
+            </mat-radio-group>
+          </div>
+        </div>
+        <div *ngIf="showMinute">
+          <div class="example-div" [formGroup]="MinuteRadioForm">
+            <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="MinuteRadioControl" class="example-radio-group" >
+
+              <mat-radio-button  value="1"  class="example-radio-button" >
+                every minute
+              </mat-radio-button>
+
+              <mat-radio-button value="2" class="example-radio-button" [formGroup]="EveryMinuteStartingForm" >
+                every 
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="every" >
+                    <mat-option *ngFor="let tim of time" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                minute(s) starting at minute
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="starting" >
+                    <mat-option *ngFor="let tim of time" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-radio-button>
+
+              <mat-radio-button value="3" class="example-radio-button"  [formGroup]="SpecificMinuteForm" >
+                Specific minute (choose one or many)
+                <mat-form-field appearance="outline" required >
+                  <mat-select multiple  formControlName="specificMinute"   >
+                    <!-- <mat-select-trigger>
+                      {{hour.value ? hour.value[0] : ''}}
+                      <span *ngIf="hour.value?.length > 1" class="example-additional-selection">
+                        (+{{hour.value.length - 1}} {{hour.value?.length === 2 ? 'other' : 'others'}})
+                      </span>
+                    </mat-select-trigger> -->
+                    <mat-option  *ngFor="let tim of time" [value]="tim">{{tim}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-radio-button>
+
+              <mat-radio-button value="4" class="example-radio-button" [formGroup]="EveryMinuteBetweenForm"  >
+                Every minute between minute
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="everyMinute"  >
+                    <mat-option *ngFor="let tim of time" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                and minute
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="between"  >
+                    <mat-option *ngFor="let tim of time" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-radio-button>
+
+
+            </mat-radio-group>
+          </div>
+        </div>
+        <div>
+
+        </div>
+        <div *ngIf="showHour">
+          <div class="example-div" [formGroup]="HourRadioForm">
+            <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="HourRadioControl" class="example-radio-group" >
+
+              <mat-radio-button  value="1"  class="example-radio-button" >
+                every hour
+              </mat-radio-button>
+
+              <mat-radio-button value="2" class="example-radio-button" [formGroup]="EveryHourStartingForm" >
+                every 
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="every" >
+                    <mat-option *ngFor="let tim of hour" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                hour(s) starting at hour
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="starting" >
+                    <mat-option *ngFor="let tim of hour" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-radio-button>
+
+              <mat-radio-button value="3" class="example-radio-button"  [formGroup]="SpecificHourForm" >
+                Specific hour (choose one or many)
+                <mat-form-field appearance="outline" required >
+                  <mat-select multiple  formControlName="specificHour"   >
+                    <!-- <mat-select-trigger>
+                      {{hour.value ? hour.value[0] : ''}}
+                      <span *ngIf="hour.value?.length > 1" class="example-additional-selection">
+                        (+{{hour.value.length - 1}} {{hour.value?.length === 2 ? 'other' : 'others'}})
+                      </span>
+                    </mat-select-trigger> -->
+                    <mat-option  *ngFor="let tim of hour" [value]="tim">{{tim}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-radio-button>
+
+              <mat-radio-button value="4" class="example-radio-button" [formGroup]="EveryHourBetweenForm"  >
+                Every hour between hour
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="everyHour"  >
+                    <mat-option *ngFor="let tim of hour" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                and hour
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="between"  >
+                    <mat-option *ngFor="let tim of hour" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-radio-button>
+
+
+            </mat-radio-group>
+          </div>
+        </div>
+        <div>
+        <div *ngIf="showDay">
+          <div class="example-div" [formGroup]="DayRadioForm">
+            <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="DayRadioControl" class="example-radio-group" >
+
+              <mat-radio-button  value="1"  class="example-radio-button" >
+                every day
+              </mat-radio-button>
+
+              <mat-radio-button value="2" class="example-radio-button" [formGroup]="EveryDayStartingForm" >
+                every 
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="every" >
+                    <mat-option *ngFor="let tim of day" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                day(s) starting on
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="starting" >
+                    <mat-option *ngFor="let tim of dayString" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-radio-button>
+              <mat-radio-button value="3" class="example-radio-button" [formGroup]="EveryDayNumberStartingForm" >
+                every 
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="every" >
+                    <mat-option *ngFor="let tim of dayNumber" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                day(s) starting on
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="starting" >
+                    <mat-option *ngFor="let tim of dayNumber" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-radio-button>
+
+              <mat-radio-button value="4" class="example-radio-button"  [formGroup]="SpecificDayForm" >
+                Specific day of week (choose one or many)
+                <mat-form-field appearance="outline" required >
+                  <mat-select multiple  formControlName="specificDay"   >
+                    <!-- <mat-select-trigger>
+                      {{minute.value ? minute.value[0] : ''}}
+                      <span *ngIf="minute.value?.length > 1" class="example-additional-selection">
+                        (+{{minute.value.length - 1}} {{minute.value?.length === 2 ? 'other' : 'others'}})
+                      </span>
+                    </mat-select-trigger> -->
+                    <mat-option  *ngFor="let tim of dayString" [value]="tim">{{tim}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-radio-button>
+              <mat-radio-button value="5" class="example-radio-button"  [formGroup]="SpecificDayMonthForm" >
+                Specific day of month (choose one or many)                <mat-form-field appearance="outline" required >
+                  <mat-select multiple  formControlName="specificDayMonth"   >
+                    <!-- <mat-select-trigger>
+                      {{hour.value ? hour.value[0] : ''}}
+                      <span *ngIf="hour.value?.length > 1" class="example-additional-selection">
+                        (+{{hour.value.length - 1}} {{hour.value?.length === 2 ? 'other' : 'others'}})
+                      </span>
+                    </mat-select-trigger> -->
+                    <mat-option  *ngFor="let tim of dayNumber" [value]="tim">{{tim}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-radio-button>
+              <mat-radio-button  value="6"  class="example-radio-button" >
+                On the last day of the month
+              </mat-radio-button>
+              <mat-radio-button  value="7"  class="example-radio-button" >
+                On the last weekday of the month
+              </mat-radio-button>
+
+              <mat-radio-button  value="8"  class="example-radio-button" [formGroup]="LastDayMonthForm" >
+                On the last
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="last" >
+                    <mat-option *ngFor="let tim of dayString" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                of the month
+              </mat-radio-button>
+              <mat-radio-button  value="9"  class="example-radio-button" [formGroup]="BeforeLastDayMonthForm" >
+                
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="beforeLast" >
+                    <mat-option *ngFor="let tim of dayNumber" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                day(s) before the end of the month
+              </mat-radio-button>
+              <mat-radio-button  value="10"  class="example-radio-button" [formGroup]="WeekendForm" >
+                Nearest weekday (Monday to Friday) to the
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="weekend" >
+                    <mat-option *ngFor="let tim of dayNumber" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                of the month
+              </mat-radio-button>
+              <mat-radio-button  value="11"  class="example-radio-button" [formGroup]="WeekDayForm" >
+                On the
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="weekDay" >
+                    <mat-option *ngFor="let tim of weekNumber" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="select">
+                  <mat-select  name="food" formControlName="weekDayString" >
+                    <mat-option *ngFor="let tim of dayString" [value]="tim">
+                      {{tim}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                of the month
+              </mat-radio-button>
+
+
+              
+
+
+            </mat-radio-group>
+          </div>
+        </div>
+        <div>
+
+        </div>
+
+
+        <div *ngIf="showMonth">
+          <div class="example-div" [formGroup]="MonthRadioForm">
+          <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="MonthRadioControl" class="example-radio-group" >
+
+            <mat-radio-button  value="1"  class="example-radio-button" >
+              every month
+            </mat-radio-button>
+
+            <mat-radio-button value="2" class="example-radio-button" [formGroup]="EveryMonthStartingForm" >
+              every 
+              <mat-form-field appearance="outline" class="select">
+                <mat-select  name="food" formControlName="every" >
+                  <mat-option *ngFor="let tim of month" [value]="tim">
+                    {{tim}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              month(s) starting at month
+              <mat-form-field appearance="outline" class="select">
+                <mat-select  name="food" formControlName="starting" >
+                  <mat-option *ngFor="let tim of monthString" [value]="tim">
+                    {{tim}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-radio-button>
+
+            <mat-radio-button value="3" class="example-radio-button"  [formGroup]="SpecificMonthForm" >
+              Specific month (choose one or many)
+              <mat-form-field appearance="outline" required >
+                <mat-select multiple  formControlName="specificMonth"   >
+                  <!-- <mat-select-trigger>
+                    {{month.value ? month.value[0] : ''}}
+                    <span *ngIf="month.value?.length > 1" class="example-additional-selection">
+                      (+{{month.value.length - 1}} {{month.value?.length === 2 ? 'other' : 'others'}})
+                    </span>
+                  </mat-select-trigger> -->
+                  <mat-option  *ngFor="let tim of monthString" [value]="tim">{{tim}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-radio-button>
+
+            <mat-radio-button value="4" class="example-radio-button" [formGroup]="EveryMonthBetweenForm"  >
+              Every month between month
+              <mat-form-field appearance="outline" class="select">
+                <mat-select  name="food" formControlName="everyMonth"  >
+                  <mat-option *ngFor="let tim of monthString" [value]="tim">
+                    {{tim}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              and month
+              <mat-form-field appearance="outline" class="select">
+                <mat-select  name="food" formControlName="between"  >
+                  <mat-option *ngFor="let tim of monthString" [value]="tim">
+                    {{tim}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-radio-button>
+
+
+          </mat-radio-group>
+        </div>
+        </div>
+        
+
+        </div>
+    
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </form>
+      
+  </mat-step>
+
+
+
+
+
+
+
+  <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+       
+        <button mat-button (click)="openDialog()"  >Create</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+  </mat-step>
+</mat-stepper>
+  
