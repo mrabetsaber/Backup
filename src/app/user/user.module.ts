@@ -29,6 +29,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
+import { UpdataserverComponent } from './management/Servers/updataserver/updataserver.component';
+import { HistoriqueComponent } from './management/historique/historique.component';
+import { AddScheduleComponent } from './management/historique/add-schedule/add-schedule.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -40,6 +43,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     ParametrageBackupDashboardComponent,
     ServerListComponent,
     AddServerComponent,
+    UpdataserverComponent,
+    HistoriqueComponent,
+    AddScheduleComponent,
   ],
   imports: [
     CommonModule,
@@ -62,7 +68,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatCardModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
+    
     
 
   ]

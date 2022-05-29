@@ -9,6 +9,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ConfirmComponent } from './confirm/confirm.component';
+import { SucessComponent } from './sucess/sucess.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     LoginComponent,
     NotFoundComponent,
     ForgotPasswordComponent,
-    RegisterComponent
+    RegisterComponent,
+    ConfirmComponent,
+    SucessComponent,
   ],
   imports: [
     CommonModule,

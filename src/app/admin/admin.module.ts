@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -36,6 +37,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RestoreDialogComponent } from './Management/shared/restore-dialog/restore-dialog.component';
+import { GmailBackupListComponent } from './Management/gmail-backup-list/gmail-backup-list.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +58,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     NavbarComponent,
     BackupListComponent,
     ChartcomponnentComponent,
+    RestoreDialogComponent,
+    GmailBackupListComponent
   ],
   imports: [
     CommonModule,
@@ -79,7 +85,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatTooltipModule,
+    MatDialogModule
 
   ]
 })

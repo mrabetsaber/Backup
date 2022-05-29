@@ -14,28 +14,20 @@
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
                         <input type="email" id="email" placeholder="Email" class="form-control" formControlName="email"
-                            name="email" />
+                            name="email" autocomplete="username" />
                             <small *ngIf="email.invalid && email.touched" class="text-danger">valid email is Required</small> 
 
                     </div>
                     <br>
                     <div class="form-group">
                         <input minlength="6" type="password" id="password" placeholder="Password" class="form-control"
-                            formControlName="password" name="password" />
+                            formControlName="password" name="password" autocomplete="current-password" />
                             <small *ngIf="password.invalid && password.touched" class="text-danger">password not valid</small> 
 
                     </div>
                     <br>
-                    <div class="form-group">
-                        <select class="form-control" formControlName="role">
-                            
-                            <option *ngFor="let role of roles" [value]="role">{{role}}</option>
-
-                          </select>
-                           
-
-                    </div>
-                    <br>
+                   
+                    
                     <input [disabled]="!loginForm.valid" type="submit" class="btn btn-primary w-100" value="Login" name="">
                 </form>
                 <br>

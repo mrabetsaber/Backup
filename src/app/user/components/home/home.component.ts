@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Server } from 'src/app/orm/Server';
+import { ServerService } from 'src/app/service/Server/server.service';
 
-interface Food {
-  value: string;
+interface DB {
+  value: number;
   viewValue: string;
 }
 @Component({
@@ -11,12 +14,29 @@ interface Food {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'All Servers'},
-  ];
-  selectedFood = this.foods[2].value;
-  ngOnInit(){}
+  server!: Observable<Server[]>;
+  dbs!: DB[];
 
+  constructor(private sserv:ServerService) { }
+
+  ngOnInit(): void {
+    this.reloadData()
+  }
+  
+  reloadData() {
+    this.server = this.sserv.getServerList();
+
+    this.server.forEach(b => {
+      console.log("the length"+b.length);
+      
+      b.map(back => {
+        
+        this.dbs=[{value:back.id,viewValue:back.type}]
+      })
+     
+   })
+   
+    
+  
+  }
 }

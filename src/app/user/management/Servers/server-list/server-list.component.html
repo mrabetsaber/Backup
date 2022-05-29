@@ -1,1 +1,39 @@
-<p>server-list works!</p>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      
+
+      <h2>Server List</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>nom d'utilisateur de server </th>
+            <th>mot de passe</th>
+            <th>nom de client</th>
+            <th>chemin local de sgbd</th>
+            
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let admin of server | async">
+            <td>{{admin.name}}</td>
+            <td>{{admin.type}}</td>
+            <td>{{admin.userName}}</td>
+            <td>{{admin.password}}</td>
+            <td>{{admin.clientName}}</td>
+            <td>{{admin.path}}</td>
+            <td>
+              <button mat-button color="primary"  routerLink="updateAdmin/{{admin.id}}"   style="margin-left: 10px" >update</button>
+              <button mat-button color="secondary" (click)="deleteBackup(admin.id)" >Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  

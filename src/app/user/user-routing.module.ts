@@ -1,3 +1,6 @@
+import { AddScheduleComponent } from './management/historique/add-schedule/add-schedule.component';
+import { HistoriqueComponent } from './management/historique/historique.component';
+import { ServerListComponent } from './management/Servers/server-list/server-list.component';
 import { AddParametrageBackupComponent } from './management/ParametrageBackup/add-parametrage-backup/add-parametrage-backup.component';
 import { AdminDashboardComponent } from './../admin/components/admin-dashboard/admin-dashboard.component';
 import { AddServerComponent } from './management/Servers/add-server/add-server.component';
@@ -14,9 +17,12 @@ const routes: Routes = [
     path: '', component: UserDashboardComponent, children: [
       { path: '', component: HomeComponent },
       {path:'addParametrageBackup',component:AddParametrageBackupComponent},
-      { path: 'ParametrageList', component: ParametrageBackupListComponent },
+      {path:'addParametrageHistory',component:AddScheduleComponent},
+      { path: 'parametrageList', component: ParametrageBackupListComponent },
       { path: 'updateParametrage/:id', component: UpdateParametrageBackupComponent },
-      {path:'addServer',component:AddServerComponent},
+      { path: 'addServer', component: AddServerComponent },
+      { path: 'serverList', component: ServerListComponent },
+      {path:'historique',component:HistoriqueComponent},
       { path: '', redirectTo: '/parametrage/home', pathMatch: 'full' },
   ] },
   

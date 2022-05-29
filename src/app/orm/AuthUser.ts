@@ -1,8 +1,8 @@
 export class AuthUser {
   id!: number;
-  nom!: string;
-  prenom!: string;
+  firstName!: string;
+  lastName!: string;
   email!: string;
   password!: String;
-  role!: String;
+  appUserRole!: String;
 }

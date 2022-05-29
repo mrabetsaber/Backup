@@ -17,7 +17,7 @@ export class ServerService {
   }
 
   createServer(Server: Object): Observable<Object> {
-    console.log('hey');
+    
     
     return this.http.post(`${this.baseUrl}`, Server);
   }

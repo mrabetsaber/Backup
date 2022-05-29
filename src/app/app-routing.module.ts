@@ -1,3 +1,6 @@
+import { SucessComponent } from './auth/sucess/sucess.component';
+
+import { ConfirmComponent } from './auth/confirm/confirm.component';
 import { UserModule } from './user/user.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -9,6 +12,8 @@ const routes:Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'confirm/:token', component:ConfirmComponent},
+  { path: 'sucessRegister', component:SucessComponent},
   {
     
     path: 'admin',

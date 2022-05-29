@@ -21,7 +21,7 @@ import { File1 } from 'src/app/orm/file';
 })
 export class ChartcomponnentComponent implements OnInit {
   file!: File1[];
-  dataFrom=[ 65, 59, 80, 81, 56, 55, 40 ]
+  dataFrom=[]
   chartForm = new FormGroup({
     'client': new FormControl(null, Validators.required),
     'dateFrom': new FormControl(Date(), Validators.required),
@@ -137,7 +137,7 @@ export class ChartcomponnentComponent implements OnInit {
     scales: {
       x: {},
       y: {
-        min: 10
+        min: 100
       }
     },
     plugins: {
@@ -156,10 +156,10 @@ export class ChartcomponnentComponent implements OnInit {
   ];
 
   public barChartData: ChartData<'bar'> = {
-    labels: [ '2006', '2007', '2008', '2009', '2010', '2011', '2012' ],
+    labels: [  this.datePipe.transform(this.chartForm.value.dateFrom, 'dd/MM/yyyy'),this.datePipe.transform(this.chartForm.value.dateTo, 'dd/MM/yyyy') ],
     datasets: [
-      { data: this.dataFrom, label: 'Series A' },
-      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series B' }
+      { data: this.dataFrom, label: 'date A' },
+      { data: [ ], label: 'date B' }
     ]
   };
 
@@ -172,30 +172,6 @@ export class ChartcomponnentComponent implements OnInit {
    // console.log(event, active);
   }
 
-  public randomize(): void {
-  //   // Only Change 3 values
-  this.barChartData.datasets[0].data = this.dataFrom
-  //     Math.round(Math.random() * 100),
-  //     59,
-  //     80,
-  //     Math.round(Math.random() * 100),
-  //     56,
-  //     Math.round(Math.random() * 100),
-  //     40 ];
-
-    this.chart?.update();
-
-  //   console.log(this.chartForm.value.date);
-  //   Date.now()
-  //  let  todayNumber: string = Date();
-  // let todayDate : number  = new Date(1647089644468).getDate();
-  // let todayString : number =  Date.now();
-  // let todayISOString : string = new Date().toISOString();
-    
-    
-    console.log(this.dataFrom);
-    
-    
-  }
+ 
 
 }

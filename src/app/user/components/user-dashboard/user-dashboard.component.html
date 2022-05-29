@@ -17,19 +17,54 @@
               <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
             </a>
                     </li>
-    
+                    <li class="sidebar-header">
+                      Server
+                  </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" [routerLink]="[ 'addServer']">
               <i class="align-middle" data-feather="user"></i> <span class="align-middle">Add server </span>
             </a>
                     </li>
-    
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" [routerLink]="[ 'serverList']">
+              <i class="align-middle" data-feather="user"></i> <span class="align-middle">server List</span>
+            </a>
+                    </li>
+                    <li class="sidebar-header">
+                      Server Schedule  
+                  </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" [routerLink]="[ 'addParametrageBackup']">
               <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Add schedule</span>
             </a>
                     </li>
     
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" [routerLink]="[ 'parametrageList']">
+              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">schedule List</span>
+            </a>
+                    <li class="sidebar-header">
+                      history Schedule  
+                  </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" [routerLink]="[ 'addParametrageHistory']">
+              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Add schedule</span>
+            </a>
+                    </li>
+    
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" [routerLink]="[ 'parametrageList']">
+              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">schedule List</span>
+            </a>
+                    </li>
+                     <li class="sidebar-header">
+                      historique
+                  </li>
+                  <li class="sidebar-item">
+                    <a class="sidebar-link" [routerLink]="[ 'historique']">
+          <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">historique List</span>
+        </a>
+                </li>
                    
 
                 </ul>
@@ -43,19 +78,21 @@
     
     </mat-drawer>
   
-    <div class="example-sidenav-content">
-        <mat-toolbar>
+    <div >
+        <mat-toolbar color="primary">
             <button mat-icon-button class="example-icon"  (click)="drawer.toggle()" aria-label="Example icon-button with menu icon">
               <mat-icon>menu</mat-icon>
             </button>
-            <span>My App</span>
+            <span>{{currentRoute}}</span>
             <span class="example-spacer"></span>
-            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-              <mat-icon>favorite</mat-icon>
-            </button>
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-              <mat-icon>share</mat-icon>
-            </button>
+            <ul class="navbar-nav ms-auto">
+              <li class=" btn-primary nav-item  text-white" role="button">
+                  <button mat-raised-button color="primary"  (click)="logout()">logout</button>
+              </li>
+              
+              
+          </ul>
+           
           </mat-toolbar>
      
       <router-outlet></router-outlet>

@@ -25,11 +25,8 @@ export class BackupListService {
       responseType: 'blob'
     });
   }
-  upload(formData: FormData): Observable<HttpEvent<string[]>> {
-    return this.http.post<string[]>(`${this.server}/upload`, formData, {
-      reportProgress: true,
-      observe: 'events'
-    });
-  }
+  restoreFile(dataBase:Object): Observable<any>{
+   return this.http.post(`${this.server}/backup/restore`,dataBase)
+ }
 
 }

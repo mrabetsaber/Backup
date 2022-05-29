@@ -1,9 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { faFile, faFolder, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { File1 } from 'src/app/orm/file';
 import { BackupListService } from 'src/app/service/admin/management/backup-list.service';
+import { RestoreDialogComponent } from '../shared/restore-dialog/restore-dialog.component';
 
 @Component({
   selector: 'app-backup-list',
@@ -21,7 +23,7 @@ export class BackupListComponent implements OnInit {
   progressFolder: boolean=true;
   progressFile: boolean=true;
 
-  constructor(private backup: BackupListService) { }
+  constructor(private backup: BackupListService,public dialog: MatDialog) { }
   admins!: Observable<File1[]>;
   file!:File1[];
   panelOpenState = false;
@@ -62,6 +64,9 @@ export class BackupListComponent implements OnInit {
       
     });
     }
+    let test: File1 = new File1();
+    test = { name: "test", id: "d", size: 10, createdTime: { value: 1, dateOnly: true, timeZoneShift: 1 } }
+    this.file.push(test);
   }
 
   downloadFile(id:String,name:String) {
@@ -79,6 +84,11 @@ export class BackupListComponent implements OnInit {
         
       }
     );
+
+  }
+  openDialog(id: String, name: String): void {
+    //this.downloadFile(id, name);
+    this.dialog.open(RestoreDialogComponent)
   }
 
   

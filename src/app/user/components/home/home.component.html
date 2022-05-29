@@ -3,9 +3,11 @@
       <mat-card class="example-card-upper">
           Servers :
           <mat-form-field appearance="outline">
-            <mat-select [(value)]="selectedFood">
+            <mat-label>Select Server</mat-label>
+
+            <mat-select >
               
-              <mat-option [value]="option.value" *ngFor="let option of foods">{{ option.viewValue }}</mat-option>
+              <mat-option [value]="option.value" *ngFor="let option of dbs">{{ option.viewValue }}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-button-toggle-group name="favoriteColor"class="example-spacer" aria-label="Favorite Color">

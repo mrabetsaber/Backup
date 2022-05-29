@@ -462,7 +462,31 @@
       </form>
       
   </mat-step>
-
+  <mat-step>
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Details</ng-template>
+      <h5>Select the dataBase Server to backup</h5>
+      <mat-form-field appearance="outline">
+        <mat-label>Backup Server</mat-label>
+        <mat-select formControlName="type" >
+          <mat-option *ngFor="let db of dbs" [value]="db.value">
+            {{db.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+     
+      <div class="example-div">
+         <h5>Select the Database Name</h5>
+         <p>Database Name</p>
+         <mat-form-field class="example-full-width" appearance="outline" >
+             <input matInput formControlName="dataBaseName" >
+         </mat-form-field>
+       </div>
+      <div>
+        <button mat-button matStepperNext >Next</button>
+      </div>
+    </form>
+</mat-step>
 
 
 

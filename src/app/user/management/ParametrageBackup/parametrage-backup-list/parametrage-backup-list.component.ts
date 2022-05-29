@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ParametrageBackup } from './../../../../orm/ParametrageBackup';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/orm/User';
-import { AdminService } from 'src/app/service/admin/admin.service';
+import { ParametrageBackupService } from 'src/app/service/ParametrageBackup/parametrage-backup.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-parametrage-backup-list',
@@ -10,31 +11,78 @@ import { AdminService } from 'src/app/service/admin/admin.service';
   styleUrls: ['./parametrage-backup-list.component.css']
 })
 export class ParametrageBackupListComponent implements OnInit {
-  constructor(private aserv: AdminService,private router: Router) { }
-  admins!: Observable<User[]>;
+  
+  constructor(private bserv: ParametrageBackupService,private router: Router,public dialog: MatDialog) { }
+  backup!: Observable<ParametrageBackup[]>;
 
   ngOnInit(): void {
     this.reloadData();
   }
 
   reloadData() {
-    this.admins = this.aserv.getAdminList();
-  }
-  deleteAdmin(id: number) {
-    console.log(id);
+    this.backup = this.bserv.getBackupList();
+    this.backup.forEach(b => {
+      b.map(b1 => {
+        console.log(b1);
+        
+      });
+      
+    })
     
-    this.aserv.deleteAdmin(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.reloadData();
-        });
+  }
+  deleteBackup(id: number): void {
+
+    
+    const dialogRef = this.dialog.open(DeleteComponent, {
+      width: '250px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      
+      if (result) {
+      //   this.bserv.deleteBackup(id)
+      // .subscribe(
+      //   data => {
+      //     console.log(data);
+      //     this.reloadData();
+      //   });
+        console.log("yes");
+        
+        
+      }
+      
+    });
+    
+  }
+  
+  updateBackup(id: number){
+    this.router.navigate(['/updateBackup', id]);
+    
+    
   }
 
-  updateAdmin(id: number){
-    this.router.navigate(['/updateAdmin', id]);
-    
-    
+}
+
+
+export interface DialogData {
+  schedule: string;
+  dataBaseName: string;
+  server: string;
+}
+
+@Component({
+  selector: 'app-dialog',
+  templateUrl: './delete.component.html',
+})
+export class DeleteComponent implements OnInit {
+  result = true;
+  constructor(
+    public dialogRef: MatDialogRef<DeleteComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+  ngOnInit(): void {
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

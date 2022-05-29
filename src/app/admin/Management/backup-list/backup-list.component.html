@@ -28,10 +28,13 @@
           </mat-expansion-panel-header>
           <mat-spinner *ngIf="progressFile"></mat-spinner>
           <div *ngFor="let item of file">
-            <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-              <fa-icon [icon]="faFile" class="icon" ></fa-icon>
-              {{item.name}}
+            <fa-icon [icon]="faFile" class="icon" ></fa-icon>
+            {{item.name}}
+            <button mat-icon-button (click)="downloadFile(item.id,item.name)"  matTooltip="Download">
               <mat-icon>download</mat-icon>
+            </button>
+            <button mat-icon-button (click)="openDialog(item.id,item.name)" matTooltip="Restore">
+              <mat-icon>restore</mat-icon>
             </button>
           </div>
           

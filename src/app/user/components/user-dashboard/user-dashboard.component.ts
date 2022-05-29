@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDashboardComponent implements OnInit {
 
-  constructor() { }
+  currentRoute: string;
+  constructor(private router: Router,private auth: AuthService) {
+    this.currentRoute = "Demo";
+    this.router.events.subscribe(event => {
 
-  ngOnInit(): void {
+      if (event instanceof NavigationEnd) {
+        this.currentRoute = event.url;
+        console.log(event);
+      }
+
+
+    });
+    
+  }
+  logout(): void {
+    this.auth.logout();
+  }
+    ngOnInit(): void {
+    }
+
   }
 
-}

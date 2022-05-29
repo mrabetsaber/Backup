@@ -17,7 +17,7 @@ export class AdminService {
   }
 
   createAdmin(Admin: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, Admin);
+    return this.http.post("http://localhost:8080/api/v1/registration", Admin);
   }
 
   updateAdmin(id: number, value: any): Observable<Object> {

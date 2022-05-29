@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { UpdateAdminComponent } from './Management/admin/update-admin/update-admin.component';
+import { GmailBackupListComponent } from './Management/gmail-backup-list/gmail-backup-list.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,9 @@ const routes: Routes = [
           {path: 'updateAdmin/:id', component: UpdateAdminComponent}
         ]
       },
-      { path: 'backups', component: BackupListComponent},
+      { path: 'backups', component: BackupListComponent },
+      { path: 'backupsEmail', component: GmailBackupListComponent },
+      
       {path: 'chart', component: ChartcomponnentComponent},
       { path: '', redirectTo: '/admin/home', pathMatch: 'full' },]
   }];

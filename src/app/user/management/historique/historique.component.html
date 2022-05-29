@@ -1,0 +1,28 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      
+
+      <h2>historique List</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>status</th>
+            <th>temp</th>
+            <th>Exception</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let admin of historique | async">
+            <td>{{admin.status}}</td>
+            <td>{{admin.time}}</td>
+            <td>{{admin.exception}}</td>          
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  
