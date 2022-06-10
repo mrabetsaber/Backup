@@ -1,3 +1,5 @@
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -8,7 +10,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
-import { ParametrageBackupListComponent } from './management/ParametrageBackup/parametrage-backup-list/parametrage-backup-list.component';
+import { ParametrageBackupListComponent, Update1Component } from './management/ParametrageBackup/parametrage-backup-list/parametrage-backup-list.component';
 import { UpdateParametrageBackupComponent } from './management/ParametrageBackup/update-parametrage-backup/update-parametrage-backup.component';
 import { AddParametrageBackupComponent } from './management/ParametrageBackup/add-parametrage-backup/add-parametrage-backup.component';
 import { ParametrageBackupDashboardComponent } from './management/ParametrageBackup/parametrage-backup-dashboard/parametrage-backup-dashboard.component';
@@ -19,7 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { ServerListComponent } from './management/Servers/server-list/server-list.component';
+import { ServerListComponent, UpdateServerComponent } from './management/Servers/server-list/server-list.component';
 import { AddServerComponent } from './management/Servers/add-server/add-server.component';
 import {MatListModule} from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -29,23 +31,26 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
-import { UpdataserverComponent } from './management/Servers/updataserver/updataserver.component';
 import { HistoriqueComponent } from './management/historique/historique.component';
 import { AddScheduleComponent } from './management/historique/add-schedule/add-schedule.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 @NgModule({
   declarations: [
+    UpdateServerComponent,
     HomeComponent,
     HeaderComponent,
     UserDashboardComponent,
     ParametrageBackupListComponent,
-    UpdateParametrageBackupComponent,
     AddParametrageBackupComponent,
     ParametrageBackupDashboardComponent,
     ServerListComponent,
     AddServerComponent,
-    UpdataserverComponent,
     HistoriqueComponent,
     AddScheduleComponent,
+    UpdateParametrageBackupComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -69,9 +74,10 @@ import { AddScheduleComponent } from './management/historique/add-schedule/add-s
     MatRadioModule,
     MatCheckboxModule,
     MatDialogModule,
-    
-    
-
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ]
 })
 export class UserModule { }

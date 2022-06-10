@@ -19,20 +19,8 @@ export class ConfirmComponent implements OnInit {
   }
   
   tackeMeHome(): void{
-    
-    if (!this.auth.isLoggedIn()) {
-      this.router.navigate(['/']);
-    }
-    else if (this.auth.isLoggedInAsAdmin()) {
-      this.router.navigate(['/admin']);
-    }
-    else if (this.auth.isLoggedInAsStudent()) {
-      this.router.navigate(['/student']);
-
-    }
-    else if (this.auth.isLoggedInAsTeacher()) {
-      this.router.navigate(['/teacher'])
-    }
+  
+    this.router.navigate(['http://localhost:8080/googlesignin']);
   }
 
 

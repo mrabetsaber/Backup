@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
       
       b.map(back => {
         
-        this.dbs=[{value:back.id,viewValue:back.type}]
+      //  this.dbs=[{value:back.id,viewValue:back.type}]
       })
      
    })

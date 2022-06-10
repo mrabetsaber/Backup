@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import Swal from 'sweetalert2';
 
 interface DB {
   value: number;
@@ -22,8 +23,7 @@ interface DB {
 export class AddParametrageBackupComponent implements OnInit {
   animal!: string;
   name!: string;
-
-
+  show=false
   openDialog(): void {
     this.backup.clientName = this.firstFormGroup.value.clientName
     this.backup.dataBaseName = this.secondFormGroup.value.dataBaseName;
@@ -89,6 +89,7 @@ export class AddParametrageBackupComponent implements OnInit {
   }
  
   dbs: DB[] = [];
+  strategies: DB[]= [{value:1,viewValue:"Drive"},{value:2,viewValue:"Email"}];
   server!: Observable<Server[]>;
 
   reloadData() {
@@ -99,7 +100,7 @@ export class AddParametrageBackupComponent implements OnInit {
       
       b.map(back => {
         
-        this.dbs=[{value:back.id,viewValue:back.type}]
+        this.dbs.push({value:back.id,viewValue:back.userName})
       })
      
    })
@@ -128,6 +129,15 @@ export class AddParametrageBackupComponent implements OnInit {
   firstFormGroup=new FormGroup({});
   secondFormGroup = new FormGroup({});
   thirdFormGroup = new FormGroup({});
+  onchange() {
+    if (this.thirdFormGroup.value.strategy==2) {
+      this.show = true
+      
+      console.log(this.thirdFormGroup.value.strategy);
+    }
+  }
+
+
   SecondRadioForm = new FormGroup({});
   EverySecondBetweenForm = new FormGroup({});
   EverySecondStartingForm = new FormGroup({});
@@ -206,7 +216,10 @@ export class AddParametrageBackupComponent implements OnInit {
       dataBaseName: ['', Validators.required],
     });
    
-    
+    this.thirdFormGroup = this._formBuilder.group({
+      strategy: ['', Validators.required],
+      email: ['', [Validators.email]],
+    })
     this.SecondRadioForm= this._formBuilder.group({
       SecondRadioControl:['1']
     });
@@ -214,7 +227,7 @@ export class AddParametrageBackupComponent implements OnInit {
       specificSecond:[0,Validators.required]
     });
     this.EverySecondStartingForm = this._formBuilder.group({
-      every: [0, Validators.required],
+      every: [0, [Validators.required,Validators.max(59),Validators.min(0)]],
       starting:[0, Validators.required]
       
     });
@@ -523,9 +536,39 @@ export class AddParametrageBackupComponent implements OnInit {
   submit() {
     
     this.backup.clientName = this.firstFormGroup.value.clientName
-    this.backup.dataBaseName = this.secondFormGroup.value.dataBaseName;
+    this.backup.dataBaseName = this.firstFormGroup.value.dataBaseName;
+    this.backup.strategy = this.thirdFormGroup.value.strategy
+    this.backup.emailReceiver = this.thirdFormGroup.value.email;
     this.backup.schedule = this.cron();
-    this.pserv.createBackup(this.firstFormGroup.value.type,this.backup).subscribe();
+    let that = this;
+    this.pserv.createBackup(this.firstFormGroup.value.type,this.backup).subscribe( {
+      complete() {
+        Swal.fire('Done...', 'You add the server successfuly', 'success');
+        that.router.navigate(['/user']);
+    },
+      error(err) {
+        if (err.status === 0) {
+          // A client-side or network error occurred. Handle it accordingly.
+          Swal.fire(
+            'Error',
+           "network error occurred",
+            'error'
+          )
+          console.error('An error occurred:', err.error,err.status);
+        } else {
+          // The backend returned an unsuccessful response code.
+          // The response body may contain clues as to what went wrong.
+          Swal.fire(
+            'Error',
+           err.message,
+            'error'
+          )
+          console.error(
+            `Backend returned code ${err.status}, body was: `, err.error);
+        }
+      
+    
+  }});
     
     
     

@@ -6,5 +6,9 @@ button.example-custom-date-class {
     max-width: 800px;
     text-align: center;
     max-height: 20px;
+
     
   }
+.example-full-width{
+  margin-left: 10%;
+}

@@ -1,0 +1,16 @@
+table {
+    width: 100%;
+  }
+  
+  .search {
+    align-self: center;
+    font-size: 14px;
+    width: 40%;
+    background-color: #fff;
+    margin:0 0 ;
+    padding: 0 0;
+  }
+  
+  td, th {
+    width: 25%;
+  }

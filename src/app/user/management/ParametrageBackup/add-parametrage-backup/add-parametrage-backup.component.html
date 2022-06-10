@@ -1,12 +1,12 @@
 <!-- TODO: add this propretie to next Line "linear" -->
-<mat-stepper #stepper>
+<mat-stepper #stepper linear >
 
 
   <mat-step [stepControl]="firstFormGroup" [editable]="false">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Details</ng-template>
         <h5>Select the dataBase Server to backup</h5>
-        <mat-form-field appearance="outline">
+        <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Backup Server</mat-label>
           <mat-select formControlName="type" >
             <mat-option *ngFor="let db of dbs" [value]="db.value">
@@ -37,7 +37,7 @@
 
 
 
-  <mat-step  [stepControl]="thirdFormGroup" label="schedule" [editable]="true" >
+  <mat-step  [stepControl]="firstFormGroup" label="schedule" [editable]="false" >
       <mat-button-toggle-group name="favoriteColor"class="example-spacer" aria-label="Favorite Color">
         <mat-button-toggle (click)="showSeconds()" >Seconds</mat-button-toggle>
         <mat-button-toggle (click)="showMinutes()">Minutes</mat-button-toggle>
@@ -45,7 +45,7 @@
         <mat-button-toggle (click)="showDays()">Day</mat-button-toggle>
         <mat-button-toggle (click)="showMonths()">Month</mat-button-toggle>
       </mat-button-toggle-group>
-      <form  [formGroup]="thirdFormGroup">
+      <form  >
         <div *ngIf="showSecond" >
           <div class="example-div" [formGroup]="SecondRadioForm">
             <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="SecondRadioControl" class="example-radio-group" >
@@ -56,13 +56,9 @@
 
               <mat-radio-button value="2" class="example-radio-button" [formGroup]="EverySecondStartingForm" >
                 every 
-                <mat-form-field appearance="outline" class="select">
-                  <mat-select  name="food" formControlName="every" >
-                    <mat-option *ngFor="let tim of time" [value]="tim">
-                      {{tim}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+                <mat-form-field  appearance="outline" >
+                  <input type="number" matInput formControlName="every" >
+              </mat-form-field>
                 second(s) starting at second
                 <mat-form-field appearance="outline" class="select">
                   <mat-select  name="food" formControlName="starting" >
@@ -462,24 +458,24 @@
       </form>
       
   </mat-step>
-  <mat-step>
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Details</ng-template>
-      <h5>Select the dataBase Server to backup</h5>
-      <mat-form-field appearance="outline">
-        <mat-label>Backup Server</mat-label>
-        <mat-select formControlName="type" >
-          <mat-option *ngFor="let db of dbs" [value]="db.value">
+  <mat-step  [stepControl]="thirdFormGroup" [editable]="false">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>strategy</ng-template>
+      <h5>Select the Strategy</h5>
+      <mat-form-field appearance="outline"  >
+        <mat-label>send strategy</mat-label>
+        <mat-select formControlName="strategy" >
+          <mat-option   *ngFor="let db of strategies" (click)="onchange()"[value]="db.value">
             {{db.viewValue}}
           </mat-option>
         </mat-select>
       </mat-form-field>
      
-      <div class="example-div">
-         <h5>Select the Database Name</h5>
-         <p>Database Name</p>
+      <div *ngIf="show" class="example-div">
+         <h5>Select the Email receiver</h5>
+         <p>email receiver</p>
          <mat-form-field class="example-full-width" appearance="outline" >
-             <input matInput formControlName="dataBaseName" >
+             <input matInput formControlName="email" >
          </mat-form-field>
        </div>
       <div>
@@ -498,7 +494,7 @@
       <p>You are now done.</p>
       <div>
        
-        <button mat-button (click)="openDialog()"  >Create</button>
+        <button mat-button (click)="submit()"  >Create</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
   </mat-step>

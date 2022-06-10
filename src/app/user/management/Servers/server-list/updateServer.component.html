@@ -1,0 +1,48 @@
+<div class="container ">
+  <div class="row justify-content-center ">
+      <div >
+          <div >
+              
+              <div class="text-center">
+                  <h2>update Server</h2>
+              </div>
+              <p style="color: lightslategray; text-align: center;">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your server new
+                  details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                  <form [formGroup]="firstFormGroup" (submit)="submit()">
+                    <ng-template matStepLabel>Server Type</ng-template>
+                   
+                  
+                  <h4>What is the user name of your server ?</h4>
+                  <div>
+                  <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline" >
+                  
+                  <input matInput formControlName="serverUserName" placeholder="user name" value="username">
+                  </mat-form-field>
+                  </div>
+                  <h4>What is the password of the server?</h4>
+                  <div>
+                  <mat-form-field style="width: 100%;" appearance="outline" >
+                  
+                  <input matInput formControlName="serverPassword" value="password" placeholder="password" >
+                  </mat-form-field>
+                  </div>
+                  
+                  <div>
+                    <h4>What is the host of the server?</h4>
+                    <mat-form-field style="width: 100%;"  class="example-full-width" appearance="outline" >
+                    
+                    <input matInput formControlName="hostName" placeholder="ex:localhost" value="host"  >
+                    </mat-form-field>
+                    </div>
+                    <div style="text-align: center;">
+
+                      <button class="btn btn-primary w-40" type="submit" [disabled]="!firstFormGroup.valid" style="margin-right: 20%;">update Server</button>
+                      <button class="btn btn-primary w-40" type="reset" (click)="close()" >cancel</button>
+                    </div>
+                  
+                  </form>
+            
+      </div>
+  </div>
+</div>

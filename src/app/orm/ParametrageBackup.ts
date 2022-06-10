@@ -4,5 +4,6 @@ export class ParametrageBackup {
 	emailReceiver!:String;
 	 schedule!:String;
 	clientName!:String;
-	dataBaseName!:String;
+	dataBaseName!: String;
+	strategy!: String;
 }

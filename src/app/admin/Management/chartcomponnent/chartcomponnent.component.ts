@@ -65,16 +65,17 @@ export class ChartcomponnentComponent implements OnInit {
       let b = this.datePipe.transform(this.chartForm.value.dateFrom, 'dd/MM/yyyy')
       if (a == b) {
         dataFrom1.push(files.size)
-        
+        return null;
         
     }
       
       
-
+      return null;
       
     })
     if (dataFrom1 != []) {
-      this.barChartData.datasets[0].data = dataFrom1
+      
+      this.barChartData.datasets[0].data=dataFrom1
       this.chart?.update();
       console.log("a");
       
@@ -90,10 +91,10 @@ export class ChartcomponnentComponent implements OnInit {
     if (a == b) {
       dataFrom1.push(files.size)
       
-      
+      return null;
   }
     
-    
+  return null; 
 
     
   })

@@ -1,20 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
-import { Observable } from 'rxjs';
-import { ParametrageBackup } from 'src/app/orm/ParametrageBackup';
+import { Router } from '@angular/router';
+import { ParametrageBackup } from './../../../../orm/ParametrageBackup';
+import { ParametrageBackupService } from './../../../../service/ParametrageBackup/parametrage-backup.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Server } from 'src/app/orm/Server';
-import { User } from 'src/app/orm/User';
-import { AdminService } from 'src/app/service/admin/admin.service';
-import { ParametrageBackupService } from 'src/app/service/ParametrageBackup/parametrage-backup.service';
 import { ServerService } from 'src/app/service/Server/server.service';
-import { UserService } from 'src/app/service/user/user.service';
+import { Observable } from 'rxjs';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import Swal from 'sweetalert2';
+
 interface DB {
   value: number;
   viewValue: string;
+}
+export interface DialogData {
+  id: number;
+  database: String;
+  schedule: String;
+  email: String;
+  
 }
 @Component({
   selector: 'app-update-parametrage-backup',
@@ -22,11 +28,9 @@ interface DB {
   styleUrls: ['./update-parametrage-backup.component.css']
 })
 export class UpdateParametrageBackupComponent implements OnInit {
-
   animal!: string;
   name!: string;
-
-
+  show=false
   openDialog(): void {
     this.backup.clientName = this.firstFormGroup.value.clientName
     this.backup.dataBaseName = this.secondFormGroup.value.dataBaseName;
@@ -37,7 +41,7 @@ export class UpdateParametrageBackupComponent implements OnInit {
       data: {dataBaseName: this.backup.dataBaseName, schedule: this.backup.schedule,server:this.backup.clientName},
     });
     
-    dialogRef.afterClosed().subscribe((result: any) => {
+    dialogRef.afterClosed().subscribe(result => {
       
       if (result) {
         this.pserv.createBackup(this.firstFormGroup.value.type, this.backup).subscribe();
@@ -92,6 +96,7 @@ export class UpdateParametrageBackupComponent implements OnInit {
   }
  
   dbs: DB[] = [];
+  strategies: DB[]= [{value:1,viewValue:"Drive"},{value:2,viewValue:"Email"}];
   server!: Observable<Server[]>;
 
   reloadData() {
@@ -102,7 +107,7 @@ export class UpdateParametrageBackupComponent implements OnInit {
       
       b.map(back => {
         
-        this.dbs=[{value:back.id,viewValue:back.type}]
+        this.dbs.push({value:back.id,viewValue:back.userName})
       })
      
    })
@@ -131,6 +136,15 @@ export class UpdateParametrageBackupComponent implements OnInit {
   firstFormGroup=new FormGroup({});
   secondFormGroup = new FormGroup({});
   thirdFormGroup = new FormGroup({});
+  onchange() {
+    if (this.thirdFormGroup.value.strategy==2) {
+      this.show = true
+      
+      console.log(this.thirdFormGroup.value.strategy);
+    }
+  }
+
+
   SecondRadioForm = new FormGroup({});
   EverySecondBetweenForm = new FormGroup({});
   EverySecondStartingForm = new FormGroup({});
@@ -167,7 +181,8 @@ export class UpdateParametrageBackupComponent implements OnInit {
   
 
   
-  constructor(private _formBuilder: FormBuilder,private router: Router,private pserv:ParametrageBackupService,private sserv:ServerService,public dialog: MatDialog) {}
+  constructor( public dialogRef: MatDialogRef<UpdateParametrageBackupComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,private _formBuilder: FormBuilder,private router: Router,private pserv:ParametrageBackupService,private sserv:ServerService,public dialog: MatDialog) {}
 
   ngOnInit() {
     this.reloadData()
@@ -203,13 +218,16 @@ export class UpdateParametrageBackupComponent implements OnInit {
     
     this.firstFormGroup = this._formBuilder.group({
       type: ['', Validators.required],
-      dataBaseName: ['', Validators.required],
+      dataBaseName: [this.data.database, Validators.required],
     });
     this.secondFormGroup = this._formBuilder.group({
       dataBaseName: ['', Validators.required],
     });
    
-    
+    this.thirdFormGroup = this._formBuilder.group({
+      strategy: ['', Validators.required],
+      email: [this.data.email, [Validators.email]],
+    })
     this.SecondRadioForm= this._formBuilder.group({
       SecondRadioControl:['1']
     });
@@ -526,11 +544,44 @@ export class UpdateParametrageBackupComponent implements OnInit {
   submit() {
     
     this.backup.clientName = this.firstFormGroup.value.clientName
-    this.backup.dataBaseName = this.secondFormGroup.value.dataBaseName;
+    this.backup.dataBaseName = this.firstFormGroup.value.dataBaseName;
+    this.backup.strategy = this.thirdFormGroup.value.strategy
+    this.backup.emailReceiver = this.thirdFormGroup.value.email;
     this.backup.schedule = this.cron();
-    this.pserv.createBackup(this.firstFormGroup.value.type,this.backup).subscribe();
+    let that = this;
+    this.pserv.createBackup(this.firstFormGroup.value.type,this.backup).subscribe( {
+      complete() {
+        Swal.fire('Done...', 'You add the server successfuly', 'success');
+        that.router.navigate(['/user']);
+    },
+      error(err) {
+        if (err.status === 0) {
+          // A client-side or network error occurred. Handle it accordingly.
+          Swal.fire(
+            'Error',
+           "network error occurred",
+            'error'
+          )
+          console.error('An error occurred:', err.error,err.status);
+        } else {
+          // The backend returned an unsuccessful response code.
+          // The response body may contain clues as to what went wrong.
+          Swal.fire(
+            'Error',
+           err.message,
+            'error'
+          )
+          console.error(
+            `Backend returned code ${err.status}, body was: `, err.error);
+        }
+      
+    
+  }});
     
     
     
   }
+
 }
+
+

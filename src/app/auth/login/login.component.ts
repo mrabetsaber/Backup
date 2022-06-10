@@ -6,6 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/service/user/user.service';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
     'password': new FormControl('', Validators.required),
     
   });
-  constructor(private userser: UserService,private router: Router) {}
+  constructor(private userser: UserService,private router: Router, private authService: AuthService) {}
     that=this
   ngOnInit(): void {
    
@@ -50,7 +51,9 @@ export class LoginComponent implements OnInit {
       {
         next(data:AuthUser) {
      
-        that.authUser = data;
+          that.authUser = data;
+          that.authService.setLoginUser(data.id);
+          that.authService.setToken(data.firstName)
         }, error(err) {
           console.log(err.message);
           
@@ -63,5 +66,6 @@ export class LoginComponent implements OnInit {
    
     
   }
+
   
 }
