@@ -1,36 +1,44 @@
-<div style="text-align: center;">
+<div style="text-align: center;margin-top: 10px;">
 
   <mat-form-field class="search"   appearance="outline">
     <mat-label>Search</mat-label>
     <input   matInput (keyup)="applyFilter($event)"  #input>
   </mat-form-field> 
-
 </div>
 <div class="mat-elevation-z8" >
   <table mat-table [dataSource]="dataSource" >
 
 
 
-    <ng-container matColumnDef="tableName">
-      <th mat-header-cell *matHeaderCellDef > data base </th>
-      <td mat-cell *matCellDef="let row"> {{row.tableName}} </td>
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef > first Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
     </ng-container>
     <!-- Progress Column -->
     
     <!-- Name Column -->
-    <ng-container matColumnDef="schedule">
-      <th mat-header-cell *matHeaderCellDef > schedule</th>
-      <td mat-cell *matCellDef="let row"> {{row.time}} </td>
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef > last Name</th>
+      <td mat-cell *matCellDef="let row"> {{row.lastName}} </td>
     </ng-container>
     
     <!-- Fruit Column -->
-    <ng-container matColumnDef="fileName">
+    <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef  > email </th>
-      <td mat-cell *matCellDef="let row"> {{row.fileName}}</td>
+      <td mat-cell *matCellDef="let row"> {{row.email}}</td>
+    </ng-container>
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef  > Role </th>
+      <td mat-cell *matCellDef="let row"> {{row.appUserRole}}</td>
     </ng-container>
     
     
-    <ng-container matColumnDef="actions1">
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef >Actions</th>
+      <td mat-cell *matCellDef="let row"><button mat-raised-button color="primary" (click)="update(row.id)">update</button></td>
+      
+    </ng-container>
+    <ng-container matColumnDef="action1">
       <th mat-header-cell *matHeaderCellDef ></th>
 
       <td mat-cell *matCellDef="let row"><button mat-raised-button color="warn" (click)="delete(row.id)">delete</button></td>

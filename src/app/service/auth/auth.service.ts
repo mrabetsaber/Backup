@@ -72,7 +72,14 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
   setToken(token: string): void {
-    localStorage.setItem('userName', token);
+    localStorage.setItem('access_token', token);
+  }
+  setRole(Role: string): void{
+    localStorage.setItem('Role', Role);
+
+  }
+  getRole() {
+    return localStorage.getItem('Role')
   }
   getLoginUser(): string | null {
     return localStorage.getItem('id');

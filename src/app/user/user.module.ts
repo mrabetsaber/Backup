@@ -10,7 +10,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
-import { ParametrageBackupListComponent, Update1Component } from './management/ParametrageBackup/parametrage-backup-list/parametrage-backup-list.component';
+import { ParametrageBackupListComponent } from './management/ParametrageBackup/parametrage-backup-list/parametrage-backup-list.component';
 import { UpdateParametrageBackupComponent } from './management/ParametrageBackup/update-parametrage-backup/update-parametrage-backup.component';
 import { AddParametrageBackupComponent } from './management/ParametrageBackup/add-parametrage-backup/add-parametrage-backup.component';
 import { ParametrageBackupDashboardComponent } from './management/ParametrageBackup/parametrage-backup-dashboard/parametrage-backup-dashboard.component';
@@ -35,9 +35,11 @@ import { HistoriqueComponent } from './management/historique/historique.componen
 import { AddScheduleComponent } from './management/historique/add-schedule/add-schedule.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { ScheduleListComponent } from './management/historique/schedule-list/schedule-list.component';
+//import { UpdateSchedule, ScheduleListComponent } from './management/historique/schedule-list/schedule-list.component';
 @NgModule({
   declarations: [
+   // UpdateSchedule,
     UpdateServerComponent,
     HomeComponent,
     HeaderComponent,
@@ -50,13 +52,15 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     HistoriqueComponent,
     AddScheduleComponent,
     UpdateParametrageBackupComponent,
-    
+    ScheduleListComponent
   ],
   imports: [
+    MatFormFieldModule,
     CommonModule,
     UserRoutingModule,
     FontAwesomeModule,
     FormsModule,
+    MatFormFieldModule,
     ReactiveFormsModule,
     MatStepperModule,
     MatFormFieldModule,
@@ -77,7 +81,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule,MatListModule
   ]
 })
 export class UserModule { }

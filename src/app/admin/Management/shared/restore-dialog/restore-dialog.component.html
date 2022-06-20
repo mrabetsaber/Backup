@@ -1,12 +1,20 @@
 <h1 mat-dialog-title>Restore</h1>
 <div mat-dialog-content>
-  <p>choose the table where you want to restore</p>
-  <mat-form-field appearance="outline">
+  <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>data base to restore</mat-label>
     <input matInput [(ngModel)]="dataBase">
+  </mat-form-field>
+  <p></p>
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Server User Name</mat-label>
+    <input matInput [(ngModel)]="userName">
+  </mat-form-field>
+  <mat-form-field  class="example-full-width" appearance="outline">
+    <mat-label>host</mat-label>
+    <input matInput [(ngModel)]="host">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button (click)="restore()" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="downloadAndRestore()" cdkFocusInitial>Ok</button>
 </div>

@@ -1,3 +1,4 @@
+import { ScheduleListComponent } from './management/historique/schedule-list/schedule-list.component';
 import { AddScheduleComponent } from './management/historique/add-schedule/add-schedule.component';
 import { HistoriqueComponent } from './management/historique/historique.component';
 import { ServerListComponent } from './management/Servers/server-list/server-list.component';
@@ -17,7 +18,9 @@ const routes: Routes = [
     path: '', component: UserDashboardComponent, children: [
       { path: '', component: HomeComponent },
       {path:'addParametrageBackup',component:AddParametrageBackupComponent},
-      {path:'addParametrageHistory',component:AddScheduleComponent},
+      { path: 'addParametrageHistory', component: AddScheduleComponent },
+      { path: 'scheduleList', component: ScheduleListComponent},
+      
       { path: 'parametrageList', component: ParametrageBackupListComponent },
       { path: 'updateParametrage/:id', component: UpdateParametrageBackupComponent },
       { path: 'addServer', component: AddServerComponent },

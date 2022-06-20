@@ -4,5 +4,5 @@ export class AuthUser {
   lastName!: string;
   email!: string;
   password!: String;
-  appUserRole!: String;
+  appUserRole!: string;
 }

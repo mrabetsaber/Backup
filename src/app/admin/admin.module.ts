@@ -9,10 +9,6 @@ import { AddAdminComponent } from './Management/admin/add-admin/add-admin.compon
 import { AdminListComponent } from './Management/admin/admin-list/admin-list.component';
 import { AdminManagementDashboardComponent } from './Management/admin/admin-management-dashboard/admin-management-dashboard.component';
 import { UpdateAdminComponent } from './Management/admin/update-admin/update-admin.component';
-import { UserListComponent } from './Management/user/user-list/user-list.component';
-import { UpdateUserComponent } from './Management/user/update-user/update-user.component';
-import { UserManagementheaderComponent } from './Management/user/user-managementheader/user-managementheader.component';
-import { UserManagementDashboardComponent } from './Management/user/user-management-dashboard/user-management-dashboard.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -40,6 +36,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RestoreDialogComponent } from './Management/shared/restore-dialog/restore-dialog.component';
 import { GmailBackupListComponent } from './Management/gmail-backup-list/gmail-backup-list.component';
+import { UpdateUserComponent, UserListComponent } from './Management/UserManagemenet/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -48,18 +45,15 @@ import { GmailBackupListComponent } from './Management/gmail-backup-list/gmail-b
     AddAdminComponent,
     AdminListComponent,
     AdminManagementDashboardComponent,
-    
     UpdateAdminComponent,
     UserListComponent,
-    UpdateUserComponent,
-    UserManagementheaderComponent,
-    UserManagementDashboardComponent,
     SidebarComponent,
     NavbarComponent,
     BackupListComponent,
     ChartcomponnentComponent,
     RestoreDialogComponent,
-    GmailBackupListComponent
+    GmailBackupListComponent,
+    UpdateUserComponent
   ],
   imports: [
     CommonModule,

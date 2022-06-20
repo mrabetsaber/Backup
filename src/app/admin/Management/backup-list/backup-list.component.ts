@@ -88,7 +88,7 @@ export class BackupListComponent implements OnInit {
   }
   openDialog(id: String, name: String): void {
     //this.downloadFile(id, name);
-    this.dialog.open(RestoreDialogComponent)
+    this.dialog.open(RestoreDialogComponent,{ data: {name: name,id:id},})
   }
 
   

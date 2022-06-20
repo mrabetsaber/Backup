@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { SucessComponent } from './sucess/sucess.component';
+import { NotauthorizedComponent } from './notauthorized/notauthorized.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { SucessComponent } from './sucess/sucess.component';
     RegisterComponent,
     ConfirmComponent,
     SucessComponent,
+    NotauthorizedComponent,
   ],
   imports: [
     CommonModule,

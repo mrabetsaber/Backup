@@ -1,17 +1,18 @@
-<!-- TODO: add this propretie to next Line "linear" -->
+<!-- TODO: add this propretie to next Line "linear"
 <mat-stepper #stepper linear>
 
 
     <mat-step [stepControl]="firstFormGroup" [editable]="true">
         <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel>Details</ng-template>
-          <mat-form-field appearance="outline" class="example-full-width">
+          <mat-form-field appearance="outline">
             <mat-label>table name</mat-label>
                 <input matInput formControlName="tableName">
           </mat-form-field>
          
-          <div style="text-align: center;">
+          <div class="example-div">
              <h5>Select the log File</h5>
+             <p>Database Name</p>
                  <input type="file"   (change)="onFileSelected($event)">
            </div>
           <div>
@@ -74,7 +75,7 @@
                         <span *ngIf="second.value?.length > 1" class="example-additional-selection">
                           (+{{second.value.length - 1}} {{second.value?.length === 2 ? 'other' : 'others'}})
                         </span>
-                      </mat-select-trigger> -->
+                      </mat-select-trigger> 
                       <mat-option  *ngFor="let tim of time" [value]="tim">{{tim}}</mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -139,7 +140,7 @@
                         <span *ngIf="hour.value?.length > 1" class="example-additional-selection">
                           (+{{hour.value.length - 1}} {{hour.value?.length === 2 ? 'other' : 'others'}})
                         </span>
-                      </mat-select-trigger> -->
+                      </mat-select-trigger> 
                       <mat-option  *ngFor="let tim of time" [value]="tim">{{tim}}</mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -207,7 +208,7 @@
                         <span *ngIf="hour.value?.length > 1" class="example-additional-selection">
                           (+{{hour.value.length - 1}} {{hour.value?.length === 2 ? 'other' : 'others'}})
                         </span>
-                      </mat-select-trigger> -->
+                      </mat-select-trigger> 
                       <mat-option  *ngFor="let tim of hour" [value]="tim">{{tim}}</mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -291,7 +292,7 @@
                         <span *ngIf="minute.value?.length > 1" class="example-additional-selection">
                           (+{{minute.value.length - 1}} {{minute.value?.length === 2 ? 'other' : 'others'}})
                         </span>
-                      </mat-select-trigger> -->
+                      </mat-select-trigger> 
                       <mat-option  *ngFor="let tim of dayString" [value]="tim">{{tim}}</mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -304,7 +305,7 @@
                         <span *ngIf="hour.value?.length > 1" class="example-additional-selection">
                           (+{{hour.value.length - 1}} {{hour.value?.length === 2 ? 'other' : 'others'}})
                         </span>
-                      </mat-select-trigger> -->
+                      </mat-select-trigger> 
                       <mat-option  *ngFor="let tim of dayNumber" [value]="tim">{{tim}}</mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -416,7 +417,7 @@
                       <span *ngIf="month.value?.length > 1" class="example-additional-selection">
                         (+{{month.value.length - 1}} {{month.value?.length === 2 ? 'other' : 'others'}})
                       </span>
-                    </mat-select-trigger> -->
+                    </mat-select-trigger> 
                     <mat-option  *ngFor="let tim of monthString" [value]="tim">{{tim}}</mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -471,4 +472,4 @@
         </div>
     </mat-step>
   </mat-stepper>
-    
+     -->

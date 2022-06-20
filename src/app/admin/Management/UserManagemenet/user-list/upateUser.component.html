@@ -1,0 +1,55 @@
+<div class="container ">
+    <div class="row justify-content-center ">
+        <div >
+            <div >
+                
+                <div class="text-center">
+                    <h2>update User</h2>
+                </div>
+                <p style="color: lightslategray; text-align: center;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your user new
+                    details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    <form [formGroup]="firstFormGroup" (submit)="submit()">
+                      <ng-template matStepLabel>Server Type</ng-template>
+                     
+                    
+                    <div>
+                    <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline" >
+                    
+                    <input matInput formControlName="firstName" placeholder="first name" value="username">
+                    </mat-form-field>
+                    </div>
+                    <div>
+                    <mat-form-field style="width: 100%;" appearance="outline" >
+                    
+                    <input matInput formControlName="lastName" value="password" placeholder="last name" >
+                    </mat-form-field>
+                    </div>
+                    
+                    <div>
+                      <mat-form-field style="width: 100%;"  class="example-full-width" appearance="outline" >
+                      
+                      <input matInput formControlName="email" placeholder="email" value="host"  >
+                      </mat-form-field>
+                    </div>
+                    <div>
+                        <h4>What is the Role of the new user?</h4>
+                        <mat-form-field style="width: 100%;"  class="example-full-width" appearance="outline" >
+                        <mat-select style="width: 100%;" formControlName="role" >
+                            <mat-option *ngFor="let db of role" [value]="db.value">
+                                {{db.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    </div>
+                      <div style="text-align: center;">
+  
+                        <button class="btn btn-primary w-40" type="submit" [disabled]="!firstFormGroup.valid" style="margin-right: 20%;">update User</button>
+                        <button class="btn btn-primary w-40" type="reset" (click)="close()" >cancel</button>
+                      </div>
+                    
+                    </form>
+              
+        </div>
+    </div>
+  </div>

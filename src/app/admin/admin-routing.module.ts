@@ -2,13 +2,13 @@ import { BackupListComponent } from './Management/backup-list/backup-list.compon
 import { ChartcomponnentComponent } from './Management/chartcomponnent/chartcomponnent.component';
 import { AdminManagementDashboardComponent } from './Management/admin/admin-management-dashboard/admin-management-dashboard.component';
 import { AdminListComponent } from './Management/admin/admin-list/admin-list.component';
-import { UserListComponent } from './Management/user/user-list/user-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { UpdateAdminComponent } from './Management/admin/update-admin/update-admin.component';
 import { GmailBackupListComponent } from './Management/gmail-backup-list/gmail-backup-list.component';
+import { UserListComponent } from './Management/UserManagemenet/user-list/user-list.component';
 
 const routes: Routes = [
   {
@@ -25,7 +25,7 @@ const routes: Routes = [
       },
       { path: 'backups', component: BackupListComponent },
       { path: 'backupsEmail', component: GmailBackupListComponent },
-      
+      {path:'appUSer'},
       {path: 'chart', component: ChartcomponnentComponent},
       { path: '', redirectTo: '/admin/home', pathMatch: 'full' },]
   }];

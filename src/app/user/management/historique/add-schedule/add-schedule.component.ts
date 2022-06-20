@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TableHistoryService } from 'src/app/service/tableHistory/table-history.service';
+import Swal from 'sweetalert2';
 
 
 interface DB {
@@ -26,28 +27,17 @@ export class AddScheduleComponent implements OnInit {
 
   animal!: string;
   name!: string;
+  fileName!: String;
 
-
-  openDialog(): void {
-    this.backup.clientName = this.firstFormGroup.value.clientName
-    this.backup.dataBaseName = this.secondFormGroup.value.dataBaseName;
-    this.backup.schedule = this.cron();
-    
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px',
-      data: {dataBaseName: this.backup.dataBaseName, schedule: this.backup.schedule,server:this.backup.clientName},
-    });
-    
-    dialogRef.afterClosed().subscribe(result => {
+  onFileSelected(event:any) {
+    if(event.target.files.length > 0) 
+    {
+      console.log(event.target.files);
       
-      if (result) {
-        this.submit()
-        this.router.navigate(['user']);
-        
-      }
-      
-    });
-  }
+      this.fileName= event.target.files[0].name
+     }
+   }
+  
 
   showSeconds() {
     this.showSecond = true;
@@ -92,15 +82,8 @@ export class AddScheduleComponent implements OnInit {
     this.showMonth = false;
   }
  
-  dbs: DB[] = [];
-  server!: Observable<Server[]>;
-
-  reloadData() {
-    
-   
-    
   
-  }
+
   showDay = false;
   showMonth = false;
   showSecond = true;
@@ -161,7 +144,6 @@ export class AddScheduleComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,private router: Router,private tableHServ:TableHistoryService,public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.reloadData()
     for (let i = 0; i < 60; i++) {
       this.time[i] = i;
       
@@ -193,8 +175,7 @@ export class AddScheduleComponent implements OnInit {
     }
     
     this.firstFormGroup = this._formBuilder.group({
-      type: ['', Validators.required],
-      dataBaseName: ['', Validators.required],
+      tableName: ['', Validators.required],
     });
     this.secondFormGroup = this._formBuilder.group({
       dataBaseName: ['', Validators.required],
@@ -513,13 +494,44 @@ export class AddScheduleComponent implements OnInit {
     
     
   }
-   backup: ParametrageBackup = new ParametrageBackup();
   submit() {
-    
+    let that=this
     let table = {
-      "time": this.cron()
+      "time": this.cron(),
+      "fileName": this.fileName,
+      "tableName":this.firstFormGroup.value.tableName
     }
-    this.tableHServ.createParametrageHistorique(table).subscribe();    
+    console.log(table);
+    
+   this.tableHServ.createParametrageHistorique(table).subscribe( {
+    complete() {
+      Swal.fire('Done...', 'You add the schedule successfuly', 'success');
+      that.router.navigate(['/user']);
+  },
+    error(err) {
+      if (err.status === 0) {
+        // A client-side or network error occurred. Handle it accordingly.
+        Swal.fire(
+          'Error',
+         "network error occurred",
+          'error'
+        )
+        console.error('An error occurred:', err.error,err.status);
+      } else {
+        // The backend returned an unsuccessful response code.
+        // The response body may contain clues as to what went wrong.
+        Swal.fire(
+          'Error',
+         err.message,
+          'error'
+        )
+        console.error(
+          `Backend returned code ${err.status}, body was: `, err.error);
+      }
+    
+  
+}});
+     
     
     
   }

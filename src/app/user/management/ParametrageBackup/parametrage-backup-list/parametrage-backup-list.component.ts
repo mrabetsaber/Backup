@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/service/auth/auth.service';
 import { ParametrageBackup } from './../../../../orm/ParametrageBackup';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -17,7 +18,7 @@ import { UpdateParametrageBackupComponent } from '../update-parametrage-backup/u
 export class ParametrageBackupListComponent implements OnInit {
   
  
-  constructor(private paramserv:ParametrageBackupService,private router: Router,public dialog: MatDialog) { }
+  constructor(private paramserv:ParametrageBackupService,private router: Router,public dialog: MatDialog,private auth:AuthService ) { }
   parametrage!: Observable<ParametrageBackup[]>;
  
   displayedColumns: string[] = [ 'database','schedule','email','actions1'];
@@ -38,7 +39,8 @@ export class ParametrageBackupListComponent implements OnInit {
    
     this.parametrage = this.paramserv.getBackupList();
     this.parametrage.forEach(b => {
-      this.attachment =b
+      this.attachment = b
+      
       
       //this.dataSource.push({name:'saber',size:0,path:''})
      console.log(b);
@@ -130,7 +132,7 @@ export class ParametrageBackupListComponent implements OnInit {
       }, next(data) {
         
         that.data=data
-        const dialogRef = that.dialog.open(Update1Component, {
+      /*  const dialogRef = that.dialog.open(Update1Component, {
           data: {
             dataBase: that.data.database,
             schedule: that.data.schedule,
@@ -152,7 +154,7 @@ export class ParametrageBackupListComponent implements OnInit {
             
           }
           
-        });
+        });*/
 
       }
     }
@@ -181,7 +183,7 @@ export interface DialogData {
   email: String;
   
 }
-
+/*
 @Component({
   selector: 'app-dialog',
   templateUrl: './update.component.html',
@@ -253,3 +255,4 @@ export class Update1Component implements OnInit {
     this.dialogRef.close();
   }
 }
+*/

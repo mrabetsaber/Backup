@@ -23,7 +23,8 @@ interface DB {
 export class AddParametrageBackupComponent implements OnInit {
   animal!: string;
   name!: string;
-  show=false
+  show = false
+  
   openDialog(): void {
     this.backup.clientName = this.firstFormGroup.value.clientName
     this.backup.dataBaseName = this.secondFormGroup.value.dataBaseName;
@@ -335,7 +336,7 @@ export class AddParametrageBackupComponent implements OnInit {
   }
 
   
-  monthNum(month: any) {
+  monthNum(month: String) {
    
     switch (month) {
       case 'January':
@@ -371,7 +372,7 @@ export class AddParametrageBackupComponent implements OnInit {
  }
  
 
-  submi(v:any,v1:any,v2:any,v3:any,v4:any,v5:any) {
+  submi(v:any,v1:any,v2:any,v3:String,v4:any,v5:any) {
 
     switch (v) {
       case "1":
@@ -495,7 +496,7 @@ export class AddParametrageBackupComponent implements OnInit {
      v3 = this.SpecificMonthForm.value.specificMonth;
      v4 = this.EveryMonthBetweenForm.value.everyMonth;
     v5 = this.EveryMonthBetweenForm.value.between;
-    let month = this.submi(v, v1, v2, v3, this.monthNum(v4),this.monthNum(v5));
+    let month = this.submi(v, v1, v2, this.monthNum(v3.toString()), this.monthNum(v4),this.monthNum(v5));
 
      v = this.HourRadioForm.value.HourRadioControl;
      v1 =this.EveryHourStartingForm.value.every ;
@@ -543,7 +544,7 @@ export class AddParametrageBackupComponent implements OnInit {
     let that = this;
     this.pserv.createBackup(this.firstFormGroup.value.type,this.backup).subscribe( {
       complete() {
-        Swal.fire('Done...', 'You add the server successfuly', 'success');
+        Swal.fire('Done...', 'You add the schedule successfuly', 'success');
         that.router.navigate(['/user']);
     },
       error(err) {

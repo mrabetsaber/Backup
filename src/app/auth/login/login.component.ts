@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/service/user/user.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,9 @@ export class LoginComponent implements OnInit {
     that=this
   ngOnInit(): void {
    
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate([this.authService.getRole()?.toLocaleLowerCase()])
+    }
   }
   
   
@@ -53,9 +57,14 @@ export class LoginComponent implements OnInit {
      
           that.authUser = data;
           that.authService.setLoginUser(data.id);
-          that.authService.setToken(data.firstName)
+          that.authService.setToken(data.toString());
+          that.authService.setRole(data.appUserRole);
         }, error(err) {
-          console.log(err.message);
+          Swal.fire(
+            'Error',
+           err.message,
+            'error'
+          )
           
       }
        

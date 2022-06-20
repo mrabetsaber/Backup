@@ -29,5 +29,7 @@ export class TableHistoryService {
   getParametrageHistoriqueList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
-
+  getParametrageHistorique(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${id}`);
+  }
 }
